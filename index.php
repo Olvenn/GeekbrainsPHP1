@@ -3,13 +3,14 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="author" content="Luka Cvrk (www.solucija.com)" />
-    <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <link rel="stylesheet" href="main.css" type="text/css" />
     <?php
-    $title = "minimalistica";
+	$title = "minimalistica";
     $dateYear = date('Y');
     $titleH1 = "minimalisticaNew";
     echo "<title>$title</title>";
     ?>
+
 </head>
 <body>
 	<div id="content">
@@ -18,35 +19,49 @@
         ?>
         
         <?php
-
-
+/*
     $a = 5;
     $b = '05';
-    //var_dump($a == $b);          Почему true?
-    /*Это неявное приведение типа string переменной $b к типу number, 
-    которое выполняется интерпретатором автоматически.
-    Т.к. при == не сравниваются типы переменных, то '05' = 5.
-    5 = 5 - это правда.
+    var_dump($a == $b);          Почему true?
+    // Это неявное приведение типа string переменной $b к типу number, 
+    // которое выполняется интерпретатором автоматически.
+    // Т.к. при == не сравниваются типы переменных, то '05' = 5.
+    // 5 = 5 - это правда.
+    
+    var_dump((int)'012345');      Почему 12345?
+        // При приведении строки к числу, если первая цифра 0, она отбрасывается,
+        // потому остаеся число 12345
+    
+    var_dump((float)123.0 === (int)123.0);  Почему false?
+        (float)123.0 - тип float, (int)123.0) - тип integer. 
+        // При использовании оператора тождественно равно (===), сравниваются не только значения,
+        // но и типы переменных.
+    
+    var_dump((int)0 === (int)'hello, world');  Почему true?
+    // Если первый символ строки не является цифрой, точкой,
+    //  знаком + или -, она преобразуется в 0
     */
-    //var_dump((int)'012345');      Почему 12345?
-        /*При приведении строки к числу, если первая цифра 0, она отбрасывается,
-        потому остаеся число 12345
-    */
-    //var_dump((float)123.0 === (int)123.0);  Почему false?
-        /*(float)123.0 - тип float, (int)123.0) - тип integer. 
-        При использовании оператора тождественно равно (===), сравниваются не только значения,
-        но и типы переменных.
-    */
-    //var_dump((int)0 === (int)'hello, world');  Почему true?
-    /* Если первый символ строки не является цифрой, точкой,
-     знаком + или -, она преобразуется в 0
-    */
+   
+    echo "<br>";
+    
+    $a = 1;
+    $b = 2;
+    $a += $b;
+    $b = $a - $b;
+    $a = $a - $b;
+    echo "<br>";
+	echo '<div 
+	style = "clear: both; border-top: 1px solid #ddd; padding: 20px 20px; font-size: 1.9em; color: #D40000; background-color: #333"
+	>';
+    echo "Замена значение переменных: \$a = " . $a . "  \$b = " . $b;
+    echo "</div>";
 ?>
 		<ul id="menu">
 			<li><a href="#">home</a></li>
 			<li><a href="#">archive</a></li>
 			<li><a href="#">contact</a></li>
 		</ul>
+
 	
 		<div class="post">
 			<div class="details">
