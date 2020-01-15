@@ -19,7 +19,7 @@
         ?>
         
         <?php
-/*
+	/*
     $a = 5;
     $b = '05';
     var_dump($a == $b);          Почему true?
@@ -43,16 +43,13 @@
     */
    
     echo "<br>";
-    
     $a = 1;
     $b = 2;
     $a += $b;
     $b = $a - $b;
     $a = $a - $b;
     echo "<br>";
-	echo '<div 
-	style = "clear: both; border-top: 1px solid #ddd; padding: 20px 20px; font-size: 1.9em; color: #D40000; background-color: #333"
-	>';
+	echo '<div 	style = "clear: both; border-top: 1px solid #ddd; padding: 20px 20px; font-size: 1.9em; color: #D40000; background-color: #333"	>';
     echo "Замена значение переменных: \$a = " . $a . "  \$b = " . $b;
     echo "</div>";
 ?>
