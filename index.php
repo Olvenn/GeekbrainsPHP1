@@ -12,7 +12,6 @@
 	echo "<title>$title</title>";
 	?>
 	<style>
-
 		.myh3 {
 			font-family: Verdana, Arial, Helvetica, sans-serif;
 			color: #333366;
@@ -27,15 +26,12 @@
 		margin: 20px 0;
 		}
 	</style>
-
 </head>
 
 <body>
-
 <div class="wrapper">
 		<?php
 		echo "<hr>";
-
 		echo "<h4 class = \"myh3\">Task 1</h4>";
 
 		$a = -10;
@@ -51,11 +47,10 @@
 		} else {
 			echo "Переменные разные по знаку находим их сумму - результат " . ($a + $b) . "<br>";
 		}
-		
-
-		echo "<hr>";
-		
+	
+		echo "<hr>";		
 		echo "<h4 class = \"myh3\">Task 2</h4>";
+
 		$a = 5;
 		switch ($a) {
 			case '0':
@@ -113,7 +108,6 @@
 		};
 
 		echo "<hr>";
-
 		echo "<h4 class = \"myh3\">Task 3</h4>";
 
 		$x = 2;
@@ -162,8 +156,12 @@
 			if ($arg2 === 0) {
 				echo 'На ноль делить нельзя! ' . '<br>';
 				echo 'Замените вторую переменную ' . '<br>';
-			} else if(!(is_numeric($arg1) && is_numeric($arg2))) {
-				echo 'Вводить можно только числовы значения' . '<br>';
+			} else if(!is_int($arg1)) { // && is_numeric($arg2))
+				echo 'Вводить можно только числовыe значения. ' . '<br>';
+				echo 'Проверьте значение первой переменной. ' . '<br>';
+			} else if(!is_int($arg2)) { // && is_numeric($arg2))
+				echo 'Вводить можно только числовыe значения. ' . '<br>';
+				echo 'Проверьте значение второй переменной. ' . '<br>';
 			} else {
 				switch ($operation) {
 					case '+':
@@ -183,23 +181,9 @@
 						break;
 				}
 			}
-
-			// if ($z == "+") {
-			// 	echo 'Cумма чисел равна: ' . ($x + $y) . '<br>';
-			// } else if($z == "-") {
-			// 	echo 'Разность чисел равна: ' . ($x - $y) . '<br>';
-			// }  else if($z == "*") {
-			// 	echo 'Произведение чисел равно: ' . ($x * $y) . '<br>';
-			// }	else if($z == "/") {
-			// 	if ($y === 0) {
-			// 		echo 'На ноль делить нельзя! ' . '<br>';
-			// 	} else {
-			// 	echo 'Частное чисел равно: ' . ($x / $y) . '<br>';
-			// 	}
-			// }
 		}
 
-		getСalculation(5, '8', "/");
+		getСalculation(5, 8, "/");
 
 		echo "<hr>";
 		echo "<h4 class = \"myh3\">Task 5</h4>";
@@ -234,12 +218,12 @@
 		$time = time();
 		$time += 3 * 3600;
 
-		// $hour = date("H", $time);
-		// $min = date("i", $time);
-		// $sec = date("s", $time);
-			$hour =3;
-		$min = 21;
-		$sec = 76;
+		$hour = date("H", $time);
+		$min = date("i", $time);
+		$sec = date("s", $time);
+		// $hour =3;
+		// $min = 21;
+		// $sec = 6;
 		$hourEnding = ['час', 'часa', 'часов'];
 		$minEnding = ['минута', 'минуты', 'минут'];
 		$secEnding = ['секунда', 'секунды', 'секунд'];
@@ -271,15 +255,7 @@
 		echo "<br>";
 		echo "<hr>";
 		?>
-
-
 </div>
-
-
-
-
-
-
 
 <div id="content">
 		<?php
