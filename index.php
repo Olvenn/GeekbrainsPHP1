@@ -1,305 +1,302 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<meta name="author" content="Luka Cvrk (www.solucija.com)" />
-	<link rel="stylesheet" href="main.css" type="text/css" />
-	<?php
-	$title = "minimalistica";
-	$dateYear = date('Y');
-	$titleH1 = "minimalisticaNew";
-	echo "<title>$title</title>";
-	?>
-	<style>
-		.myh3 {
-			font-family: Verdana, Arial, Helvetica, sans-serif;
-			color: #333366;
-			margin-bottom: 0;
-			font-size: 30px;
-		}
-		.wrapper {
-			margin-left: 100px;
-			font-size: 20px;
-		}
-		hr {
-		margin: 20px 0;
-		}
-	</style>
+	<meta charset="UTF-8">
+	<title>Интернет-магазин</title>
+	<!-- <link rel="stylesheet" href="style/normalize.css"> -->
+
+	<!-- <link rel="stylesheet" href="style/style.css"> -->
 </head>
+<style>
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px 10px;
+}
+.message {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 25px;
+    font-weight: 500;
+    color: rgb(125, 187, 33);
+}
+.messageGood {
+    color: rgb(125, 187, 33);
+}
+.messageBad {
+    color: red;
+}
+.messageName {
+    color: blue;
+}
+.pictureItem {
+    padding: 10px;
+    border: 5px inset #ccc;
+    margin: 5px;
+}
 
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.myImg:hover 
+{opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: auto;
+    max-height: 90%;
+    color: rgb(125, 187, 33);
+/*max-height: 100vh;*/
+}
+
+/* Add Animation */
+.modal-content {    
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 80px;
+    color: #999;
+    background-color: #ccc;
+    padding: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.scalePicture {
+    margin: 0 auto;
+    width: 200px;
+    text-align: center;
+    position: relative;
+    font-size: 15px;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #222;
+    user-select: none;
+    padding: 10px;
+    outline: none;
+    border-radius: 1px;
+    background: linear-gradient(to left, rgba(0,0,0,.3), rgba(0,0,0,.0) 50%, rgba(0,0,0,.3)), linear-gradient(#999, #999, #999);
+    background-size: 100% 100%, auto;
+    background-position: 50% 50%;
+    box-shadow: inset rgb(91, 139, 212) 0 -1px 1px, inset 0 1px 1px rgb(126, 162, 204), rgb(25, 89, 150) 0 0 0 1px, #000 0 10px 15px -10px;
+    transition: 0.2s;
+}
+input {
+    font-size:20px;
+    padding: 10px;
+    background-color: #ccc;
+}
+
+.name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #666;
+}
+
+</style>
 <body>
-<div class="wrapper">
-		<?php
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 1</h4>";
 
-		$a = -10;
-		$b = -1;
-		echo "<i>Первая переменная - </i>" . $a . "<br>";
-		echo "<i>Вторая переменная - </i>" . $b . "<br>";
-		echo "<br>";
+	<form method="post" enctype="multipart/form-data">
+		<input type="hidden" name="MAX_FILE_SIZE" value="12097152">
+		<input  type="file" name="picture">
+		<input type="submit" value="Загрузить файл!">
+	</form>
 
-		if ($a >= 0 && $b >= 0) {
-			echo "Переменные больше или = 0 находим их разницу - результат " . ($a - $b) . "<br>";
-		} else if ($a < 0 && $b < 0) {
-			echo "Переменные меньше 0 находим их произведение - результат " . ($a * $b) . "<br>";
-		} else {
-			echo "Переменные разные по знаку находим их сумму - результат " . ($a + $b) . "<br>";
-		}
-	
-		echo "<hr>";		
-		echo "<h4 class = \"myh3\">Task 2</h4>";
+	<?php
+	$message = "";
+	require_once 'engine/resizeImage.php';
+	require_once 'engine/fuctions.php';
 
-		$a = 5;
-		switch ($a) {
-			case '0':
-				echo '0; ';
+	// если была произведена отправка формы
+	// $filePath  = $_FILES['picture'];
 
-			case '1':
-				echo '1; ';
+	if (isset($_FILES['picture'])) {
 
-			case '2':
-				echo '2; ';
+		function checkSubmit () {
+		$check = can_upload($_FILES['picture']);		// проверяем, можно ли загружать изображение
+		$pictureUserName = $_FILES['picture']['name'];
 
-			case '3':
-				echo '3; ';
+		if ($check === true) {
 
-			case '4':
-				echo '4; ';
-
-			case '5':
-				echo '5; ';
-
-			case '6':
-				echo '6; ';
-
-			case '7':
-				echo '7; ';
-
-			case '8':
-				echo '8; ';
-
-			case '9':
-				echo '9; ';
-
-			case '10':
-				echo '10; ';
-
-			case '11':
-				echo '11; ';
-
-			case '12':
-				echo '12; ';
-
-			case '13':
-				echo '13; ';
-
-			case '14':
-				echo '14; ';
-
-			case '15':
-				echo '15';
-				break;
-
-			default:
-				echo 'Число не находится в диапазоне от 0 до 15';
-				break;
-		};
-
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 3</h4>";
-
-		$x = 2;
-		$y = 4;
-		echo "<i>Первая переменная - </i>" . $x . "<br>";
-		echo "<i>Вторая переменная - </i>" . $y . "<br>";
-		echo "<br>";
-
-		function summ($x, $y)
-		{
-			return $x + $y;
-		}
-
-		function diff($x, $y)
-		{
-			return $x - $y;
-		}
-
-		function multipl($x, $y)
-		{
-			return $x * $y;
-		}
-
-		function div($x, $y)
-		{
-			if ($y === 0) {
-				echo 'На ноль делить нельзя! ' . '<br>';
+			make_upload($_FILES['picture']);			// загружаем изображение на сервер
+			return "Файл успешно загружен!@|@Имя загруженного файла: $pictureUserName";
 			} else {
-				return $x / $y;
+				return "<strong>$check</strong>";			// выводим сообщение об ошибке
 			}
 		}
-		echo 'Cумма чисел равна: ' . summ($x, $y) . '<br>';
-		echo 'Разность чисел равна: ' . diff($x, $y) . '<br>';
-		echo 'Произведение чисел равно: ' . multipl($x, $y) . '<br>';
-		echo 'Частное чисел равно: ' . div($x, $y) . '<br>';
+		$message =   checkSubmit(); 
+	}
 
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 4</h4>";
+	function can_upload($file) 	{
 
+		$filePathTmp  = $_FILES['picture']['tmp_name'];
+		$errorCode = $_FILES['picture']['error'];
 
-		function getСalculation($arg1, $arg2, $operation)
-		{
-			echo "<i>Первая переменная - </i>" . $arg1 . "<br>";
-			echo "<i>Вторая переменная - </i>" . $arg2 . "<br>";
-			echo "<br>";
-			if ($arg2 === 0) {
-				echo 'На ноль делить нельзя! ' . '<br>';
-				echo 'Замените вторую переменную ' . '<br>';
-			} else if(!is_int($arg1)) { // && is_numeric($arg2))
-				echo 'Вводить можно только числовыe значения. ' . '<br>';
-				echo 'Проверьте значение первой переменной. ' . '<br>';
-			} else if(!is_int($arg2)) { // && is_numeric($arg2))
-				echo 'Вводить можно только числовыe значения. ' . '<br>';
-				echo 'Проверьте значение второй переменной. ' . '<br>';
-			} else {
-				switch ($operation) {
-					case '+':
-						echo 'Cумма чисел равна: ' . summ($arg1, $arg2) . '<br>';
-						break;
-					case '-':
-						echo 'Разность чисел равна: ' . diff($arg1, $arg2) . '<br>';
-						break;
-					case '*':
-						echo 'Произведение чисел равно: ' . multipl($arg1, $arg2) . '<br>';
-						break;
-					case '/':
-						echo 'Частное чисел равно: ' . div($arg1, $arg2) . '<br>';
-						break;
-					default:
-						echo 'Оператор введен не верно!';
-						break;
-				}
-			}
+		echo"<br>";
+		if ($errorCode !== UPLOAD_ERR_OK || !is_uploaded_file($filePathTmp)) { 
+
+			// Массив с названиями ошибок
+			$errorMessages = [
+				UPLOAD_ERR_INI_SIZE   => 'Размер файла превысил значение upload_max_filesize в конфигурации PHP.',
+				UPLOAD_ERR_FORM_SIZE  => 'Размер загружаемого файла превысил значение MAX_FILE_SIZE в HTML-форме.',
+				UPLOAD_ERR_PARTIAL    => 'Загружаемый файл был получен только частично.',
+				UPLOAD_ERR_NO_FILE    => 'Файл не был загружен.',
+				UPLOAD_ERR_NO_TMP_DIR => 'Отсутствует временная папка.',
+				UPLOAD_ERR_CANT_WRITE => 'Не удалось записать файл на диск.',
+				UPLOAD_ERR_EXTENSION  => 'PHP-расширение остановило загрузку файла.',
+			];
+
+			$unknownMessage = 'При загрузке файла произошла неизвестная ошибка.'; // Если в массиве нет кода ошибки	
+			$outputMessage = isset($errorMessages[$errorCode]) ? $errorMessages[$errorCode] : $unknownMessage;
+			echo ($outputMessage); // Выводим название ошибки
 		}
 
-		getСalculation(5, 8, "/");
 
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 5</h4>";
-		$date = date('Y');
-		echo "<footer>" . " Сейчас  " . $date . " год </footer>";
+		// если имя пустое, значит файл не выбран
+		if ($file['name'] == '')
+			return 'Вы не выбрали файл.';
 
-
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 6</h4>";
-
-		function power($val, $pow)
-		{
-
-			$result = $val;
-			if ($pow === 0) {
-				$result = 'Возведение в нулевую степень = 1';
-			} else if ($pow > 1) {
-				$result *= power($val, ($pow - 1));
-			}
-			return $result;
+		// если это не картинка, а какой-то то файл типа php 
+		if	(!checkFileType($filePathTmp)) {
+			return 'Можно загружать только изображения.'; 
 		}
-		$val = 3;
-		$pow = 4;
-		echo "<i>Число - </i>" . $val . "<br>";
-		echo "<i>Степень - </i>" . $pow . "<br>";
-		echo "<br>";
-		echo "Результат - :" . power($val, $pow);
 
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 7</h4>";
-		date_default_timezone_set("UTC"); 
-		$time = time();
-		$time += 3 * 3600;
+		// проверка изображений на максиальную высоту изображения 
+		if (!checkSizesWidth($filePathTmp)) {
+			return 'Высота изображения не должна превышать 1920 точек.';
+		}
 
-		$hour = date("H", $time);
-		$min = date("i", $time);
-		$sec = date("s", $time);
-		// $hour =3;
-		// $min = 21;
-		// $sec = 6;
-		$hourEnding = ['час', 'часa', 'часов'];
-		$minEnding = ['минута', 'минуты', 'минут'];
-		$secEnding = ['секунда', 'секунды', 'секунд'];
+		// проверка изображений на максиальную ширину изображения		
+		if (!checkSizesHeight($filePathTmp)) {
+			return 'Ширина изображения не должна превышать 1200 точек.';
+		}
 
+		$mime = pathinfo($_FILES['picture']['name'])['extension']; //получаем расширение файла заказчика
+		/* Вариант 2
+		разбиваем имя файла по точке и получаем массив
+		$getMime = explode('.', $file['name']);
+		нас интересует последний элемент массива - расширение
+		$mime = strtolower(end($getMime));
+		*/
 
-		function findEnd ($checkNumber, $arrayOfEndings){
-
-			$temp = $checkNumber % 10;
-	
-			if($temp >= 5) {
-				$endig = $arrayOfEndings[2];
-			
-			} else if($temp > 1 && $temp < 5) {
-				$endig = $arrayOfEndings[1];
-			} else if ($temp = 1) {
-				$endig = $arrayOfEndings[0];
-			} else {
-				$endig = $arrayOfEndings[2];
-			} 
-			
-			return $endig;
-		};
-		echo "<br>";
-
-		echo "Сейчас " . $hour. " " . findEnd($hour, $hourEnding) . " " .
-		$min. " " . findEnd($min, $minEnding) . " " .
-		$sec. " " . findEnd($sec, $secEnding);
-
-		echo "<br>";
-		echo "<hr>";
-		?>
-</div>
-
-<div id="content">
-		<?php
-		echo "<h1>$titleH1</h1>"
-		?>
-<ul id="menu">
-	<li><a href="#">home</a></li>
-	<li><a href="#">archive</a></li>
-	<li><a href="#">contact</a></li>
-</ul>
+		$types = array('jpg', 'png', 'gif', 'jpeg');//массив допустимых расширений
+		if (!in_array($mime, $types)) {
+			return 'Недопустимый тип файла.';		// если расширение не входит в список допустимых
+		}
+		// проверка повторной загрузки изображений 
+		if (!checkRepeatFile($filePathTmp)) {
+			return "Такой файл уже загружен"; 
+		}
+			return true;
+	}
+	?>
 
 
-<div class="post">
-	<div class="details">
-		<h2><a href="#">Nunc commodo euismod massa quis vestibulum</a></h2>
-		<p class="info">posted 3 hours ago in <a href="#">general</a></p>
+	<?php
+	$bigDir = 'img/big/';
+	$smallDir = 'img/small/';
+	$bigImages = scandir($bigDir);
+	$smallImages = scandir($smallDir);
+
+	if(!empty($bigImages) && !empty($smallImages)) {
+	$arr = explode("@|@", $message);
+	if (count($arr) != 1) {?>
+		<div class="message messageGood">
+			<?=$arr[0]?> 
+		</div>
+		<div class="message messageName">
+			<?=$arr[1]?>
+		</div>
+<?php 
+	} else { ?>
+		</div>
+		<div class="message messageBad">
+		<?=$arr[0]?> 		<!-- Сообщение об ошибке -->
+		</div>
+	<?php
+	}?>
+
+
+	<div class="wrapper">
+		<?php foreach ($smallImages as $key => $picture) : ?>
+			<?php if($key > 1) : ?>
+		
+		<div class = "pictureItem">
+			<a class = "bigSrc" href='<?=$bigDir . $picture;?>' target='_blank'>
+				<img class = "myImg" src='<?=$smallDir . $picture;?>'>
+			</a>
+				<?php
+				$temp = $picture;
+				$tempEnd = explode('_', $temp);			//разбиваем имя файла по точке и получаем массив
+				$tempEnd = strtolower(end($tempEnd));	//нас интересует последний элемент массива - расширение
+				$tempEnd = explode('.', $tempEnd);
+				$name = ucfirst(array_shift($tempEnd));
+				?>
+			<div class = "name">
+				<?=$name?>
+			</div>
+			<div class = "scalePicture">
+				Посмотреть увеличеное изображение.
+			</div>
+		</div>	
+
+			<?php endif; ?>
+			<?php endforeach; ?>
 
 	</div>
-	<div class="body">
-		<p>Nunc eget nunc libero. Nunc commodo euismod massa quis vestibulum. Proin mi nibh, dignissim a pellentesque at, ultricies sit amet sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel lorem eu libero laoreet facilisis. Aenean placerat, ligula quis placerat iaculis, mi magna luctus nibh, adipiscing pretium erat neque vitae augue. Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-	</div>
-	<div class="x"></div>
-</div>
 
-<div class="col">
-	<h3><a href="#">Ut enim risus rhoncus</a></h3>
-	<p>Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at.</p>
-	<p>&not; <a href="#">read more</a></p>
+		<div class="modal">
+  			<div class="close">×</div>
+  			<img class="modal-content">		 
+		</div>
 </div>
-<div class="col">
-	<h3><a href="#">Maecenas iaculis leo</a></h3>
-	<p>Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at.</p>
-	<p>&not; <a href="#">read more</a></p>
-</div>
-<div class="col last">
-	<h3><a href="#">Quisque consectetur odio</a></h3>
-	<p>Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at.</p>
-	<p>&not; <a href="#">read more</a></p>
-</div>
+	 <?php }
+	 	?>
 
-<div id="footer">
-	<p>Copyright &copy; <b><?=$date = date('Y')?></b> год <em>minimalistica</em> &middot; Design: Luka Cvrk, <a href="http://www.solucija.com/" title="Free CSS Templates">Solucija</a></p>
-</div>
-</div>
+
+<script src="js/script.js"></script>
 </body>
 
 </html>
