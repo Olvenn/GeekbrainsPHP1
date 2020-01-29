@@ -1,40 +1,20 @@
 <?php
-	function checkRepeatFile($filePathTmp)  {
-		$newHashFile = hash_file('md5', $filePathTmp);
-		$file = file_get_contents("hash.txt");
-		$hashArray = explode("@|@", file_get_contents("hash.txt"));
-		$hashStorage = 'hash.txt';
-		if (!in_array($newHashFile, $hashArray)) {
-			file_put_contents($hashStorage, $newHashFile  . "@|@", FILE_APPEND);
-			return true;
-		}
+
+// include "config.php";
+const SERVER = "localhost";
+const DB = "user_gallery";
+const LOGIN = "root";
+const PASS = "";
+
+
+	function getUserTitle($picture) {
+
+		$tempEnd = explode('_', $picture);			//разбиваем имя файла по точке и получаем массив
+		$tempEnd = strtolower(end($tempEnd));	//нас интересует последний элемент массива - расширение
+		$tempEnd = explode('.', $tempEnd);
+		$name = ucfirst(array_shift($tempEnd));
+		return $name;
 	}
-
-	function checkFileType($filePathTmp) {
-		$fi = finfo_open(FILEINFO_MIME_TYPE);		// Определяем настоящий MIME-тип картинки 
-		$mimes = (string) finfo_file($fi, $filePathTmp);		// Получим MIME-тип
-		finfo_close($fi);		// Закроем ресурс
-		if (strpos($mimes, 'image') !== false) {		// Проверим ключевое слово image (image/jpeg, image/png и т. д.)
-			return true;
-			} 
-		};
-
-		function checkSizesWidth($filePathTmp) { //    Проверяем не превышает ли ширина изображения разрешенной
-			$image = getimagesize($filePathTmp); //Получаем размеры файла
-			$limitWidth  = 1920;
-			if ($image[0] < $limitWidth) {
-			   return true;
-			}
-					
-		 }
-		 
-		 function checkSizesHeight($filePathTmp) { //    Проверяем не превышает ли высота изображения разрешенной
-			$image = getimagesize($filePathTmp); //Получаем размеры файла
-			$limitHeight = 1200;
-			if ($image[1] < $limitHeight) {
-			   return true;
-			}
-		}
 
 	function make_upload($file)	{
 		$newName =  time() . "_" . $file['name']; // формируем уникальное имя картинки: случайное число и name
@@ -45,7 +25,28 @@
 		$height = 200;
 		$ratio = $height / $image[1];
 		$width = $widthTemp * $ratio;
+		$fileHash  =  hash_file('md5', $_FILES['picture']['tmp_name']);
+		$userTitle = getUserTitle($file['name']);
+		echo $fileHash . "<br>";
+		echo $userTitle . "<br>" ;
+		// while($data = mysqli_fetch_assoc($res)){
+		// 	echo "Автомобиль ".$data['title']." стоит ".$data['price']."<br>";
+		// }
+
+		$connect = mysqli_connect(SERVER,LOGIN,PASS,DB) or 
+			die("Ошибка соединения с базой данных");
+			
+		$sql = "INSERT INTO gallery (title, hash_title, user_title, `count`) VALUES ('$newName', '$fileHash', '$userTitle', 0)";
+			
+		if (mysqli_query($connect, $sql)) {
+			echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+		}
+		mysqli_close($connect);
+
 		create_thumbnail($file['tmp_name'], 'img/small/' . $newName, $width, $height);
 		move_uploaded_file($file['tmp_name'], 'img/big/' . $newName);
-		}
+
+	}
 ?>
