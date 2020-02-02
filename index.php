@@ -45,6 +45,7 @@
 		border-radius: 10px;
 		background-color: rgba(108, 28, 141, 0.1);
 	}
+
 	.single {
 		width: 200px;
 		padding: 10px;
@@ -55,11 +56,13 @@
 		background-image: radial-gradient(rgb(9, 21, 156), rgb(26, 22, 153), rgb(42, 23, 151), rgb(59, 25, 148), rgb(75, 26, 146), rgb(92, 27, 143), rgb(108, 28, 141), rgb(125, 29, 138), rgb(141, 30, 136), rgb(158, 32, 133), rgb(174, 33, 131), rgb(191, 34, 128));
 		margin: 20px 0;
 	}
+
 	.formCover {
 		width: 600px;
 		display: flex;
 		justify-content: space-between;
 	}
+
 	.wrapDiv {
 		display: flex;
 		flex-direction: column;
@@ -70,7 +73,6 @@
 		font-size: 20px;
 		color: rgb(26, 22, 153);
 	}
-	
 </style>
 
 <body>
@@ -184,15 +186,15 @@
 				<input class="dataInput" type=text name="res" value="<?= $result ?>"><br>
 				<input class="btn" type=submit value="Получить результат">
 			</form>
-		<form class="formAct" method="get" enctype="multipart/form-data">
-			<div class="wrapDiv">
-				<div class="single">Возведение в степень</div>
-				<div class="single">Корень квадратный</div>
-				<div class="single">Процент от деления</div>
-			<div class="actionFormAct"><?=$action?></div>
-			<div class="result2"><?= $result2;  ?></div>
-			</div>
-		</form>
+			<form class="formAct" method="get" enctype="multipart/form-data">
+				<div class="wrapDiv">
+					<div class="single">Возведение в степень</div>
+					<div class="single">Корень квадратный</div>
+					<div class="single">Процент от деления</div>
+					<div class="actionFormAct"><?= $action ?></div>
+					<div class="result2"><?= $result2;  ?></div>
+				</div>
+			</form>
 	</div>
 	<?php
 	?>
@@ -202,7 +204,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 	let single = document.querySelectorAll(".single");
-	
+
 	console.log(single);
 	let innerText = "";
 
@@ -212,6 +214,7 @@
 			formAtc.submit();
 			innerText = item.innerHTML;
 			let query2 = "exponent=" + innerText
+
 			function send() {
 				$.ajax({
 					type: "POST",
@@ -234,6 +237,7 @@
 		let opt = document.querySelectorAll("option");
 		let sign = dataInput2[dataInput2.selectedIndex].value;
 		let query = "number_one=" + dataInput[0].value + "&number_two=" + dataInput[1].value + "&action=" + sign + "&res=" + dataInput[3].value;
+
 		function send() {
 			$.ajax({
 				type: "POST",
