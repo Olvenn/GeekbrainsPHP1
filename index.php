@@ -1,305 +1,257 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<meta name="author" content="Luka Cvrk (www.solucija.com)" />
-	<link rel="stylesheet" href="main.css" type="text/css" />
-	<?php
-	$title = "minimalistica";
-	$dateYear = date('Y');
-	$titleH1 = "minimalisticaNew";
-	echo "<title>$title</title>";
-	?>
-	<style>
-		.myh3 {
-			font-family: Verdana, Arial, Helvetica, sans-serif;
-			color: #333366;
-			margin-bottom: 0;
-			font-size: 30px;
-		}
-		.wrapper {
-			margin-left: 100px;
-			font-size: 20px;
-		}
-		hr {
-		margin: 20px 0;
-		}
-	</style>
+	<meta charset="UTF-8">
+	<title>Интернет-магазин</title>
+	<!-- <link rel="stylesheet" href="style/normalize.css"> -->
+
+	<!-- <link rel="stylesheet" href="style/style.css"> -->
 </head>
+<style>
+	input {
+		font-size: 20px;
+		padding: 10px;
+		background-color: #ccc;
+		margin-bottom: 10px;
+	}
+
+	.text,
+	.selectOp,
+	.btn {
+		font-size: 24px;
+		font-weight: 700;
+		color: #666;
+	}
+
+	.selectOp {
+		display: inline-block;
+	}
+
+	select {
+		font-size: 24px;
+	}
+
+	.result2 {
+		width: 300px;
+		height: 60px;
+		font-size: 20px;
+		line-height: 60px;
+		font-weight: 700;
+		text-align: center;
+		color: #000;
+		border: 2px solid rgba(26, 22, 153, 0.5);
+		margin-top: 20px;
+		border-radius: 10px;
+		background-color: rgba(108, 28, 141, 0.1);
+	}
+
+	.single {
+		width: 200px;
+		padding: 10px;
+		font-size: 18px;
+		font-weight: 700;
+		text-align: center;
+		color: #fff;
+		background-image: radial-gradient(rgb(9, 21, 156), rgb(26, 22, 153), rgb(42, 23, 151), rgb(59, 25, 148), rgb(75, 26, 146), rgb(92, 27, 143), rgb(108, 28, 141), rgb(125, 29, 138), rgb(141, 30, 136), rgb(158, 32, 133), rgb(174, 33, 131), rgb(191, 34, 128));
+		margin: 20px 0;
+	}
+
+	.formCover {
+		width: 600px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.wrapDiv {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.actionFormAct {
+		font-size: 20px;
+		color: rgb(26, 22, 153);
+	}
+</style>
 
 <body>
-<div class="wrapper">
-		<?php
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 1</h4>";
 
-		$a = -10;
-		$b = -1;
-		echo "<i>Первая переменная - </i>" . $a . "<br>";
-		echo "<i>Вторая переменная - </i>" . $b . "<br>";
-		echo "<br>";
+	<?php
 
-		if ($a >= 0 && $b >= 0) {
-			echo "Переменные больше или = 0 находим их разницу - результат " . ($a - $b) . "<br>";
-		} else if ($a < 0 && $b < 0) {
-			echo "Переменные меньше 0 находим их произведение - результат " . ($a * $b) . "<br>";
-		} else {
-			echo "Переменные разные по знаку находим их сумму - результат " . ($a + $b) . "<br>";
-		}
-	
-		echo "<hr>";		
-		echo "<h4 class = \"myh3\">Task 2</h4>";
+	include "config.php";
+	$sql = "select * from calc";
+	$res = mysqli_query($connect, $sql);
 
-		$a = 5;
-		switch ($a) {
-			case '0':
-				echo '0; ';
+	$data = mysqli_fetch_assoc($res);
+	$a = $data['action'];
+	$x = $data['number_one'];
+	$y = $data['number_two'];
+	$action = $data['exponent'];
+	// $res = $x . $a . $y;
 
-			case '1':
-				echo '1; ';
+	if (isset($_GET["action"]) ? $_GET["action"] : "") {
+		$a = $_GET["action"];
+	} else {
+		$a = $a;
+	};
 
-			case '2':
-				echo '2; ';
+	if (isset($_GET['x']) ? (int) ($_GET['x']) : "") {
+		$x = (float) $_GET["x"];
+	} else {
+		$x = $x;
+	};
 
-			case '3':
-				echo '3; ';
+	if (isset($_GET['y']) ? (int) ($_GET['y']) : "") {
+		$y = (float) $_GET["y"];
+	} else {
+		$y = $y;
+	};
 
-			case '4':
-				echo '4; ';
+	if (isset($_GET['exponent']) ? htmlspecialchars($_GET['exponent']) : "") {
+		$action = (float) $_GET["exponent"];
+	} else {
+		$action = $action;
+	};
 
-			case '5':
-				echo '5; ';
+	// if (isset($_GET['res']) ? (int)($_GET['res']) : ""){
+	// 		$result=(float)$_GET["res"];
+	// 		} else {
+	// 		$result= $res;
+	// 		};
+	// 		echo "pre";
+	// 		print_r($_GET);
+	// 		echo "/pre";
 
-			case '6':
-				echo '6; ';
-
-			case '7':
-				echo '7; ';
-
-			case '8':
-				echo '8; ';
-
-			case '9':
-				echo '9; ';
-
-			case '10':
-				echo '10; ';
-
-			case '11':
-				echo '11; ';
-
-			case '12':
-				echo '12; ';
-
-			case '13':
-				echo '13; ';
-
-			case '14':
-				echo '14; ';
-
-			case '15':
-				echo '15';
-				break;
-
-			default:
-				echo 'Число не находится в диапазоне от 0 до 15';
-				break;
-		};
-
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 3</h4>";
-
-		$x = 2;
-		$y = 4;
-		echo "<i>Первая переменная - </i>" . $x . "<br>";
-		echo "<i>Вторая переменная - </i>" . $y . "<br>";
-		echo "<br>";
-
-		function summ($x, $y)
-		{
-			return $x + $y;
-		}
-
-		function diff($x, $y)
-		{
-			return $x - $y;
-		}
-
-		function multipl($x, $y)
-		{
-			return $x * $y;
-		}
-
-		function div($x, $y)
-		{
-			if ($y === 0) {
-				echo 'На ноль делить нельзя! ' . '<br>';
+	switch ($a) {
+		case "plus":
+			$result = $x + $y;
+			$pl = "selected";
+			break;
+		case "-":
+			$result = $x - $y;
+			$sb = "selected";
+			break;
+		case "*":
+			$result = $x * $y;
+			$ml = "selected";
+			break;
+		case "/":
+			if ($y != 0) {
+				$result = round(($x / $y), 2);
+				$dv = "selected";
 			} else {
-				return $x / $y;
+				$result = "деление на ноль";
+			};
+			break;
+
+		default:
+			$result = $res;
+	};
+
+	switch ($action) {
+		case "Возведение в степень":
+			$result2 =  pow($x, $y);
+			break;
+		case "Корень квадратный":
+			$result2 = "1-e число " . round(sqrt($x), 2) . " - "  . "2-e число " . round(sqrt($y), 2);
+			break;
+		case "Процент от деления":
+			$result2 = round(($x % $y), 2);
+			break;
+		default:
+			$result2 = $result2;
+	};
+
+	?>
+	<div class="formCover">
+		<form method="get" enctype="multipart/form-data">
+			<form action="calculator.php" method=get>
+				<div class="text">Введите первое число: </div>
+				<input class="dataInput" type=text name="x" value="<?= $x ?>"><br>
+				<div class="text">Введите второе число: </div>
+				<input class="dataInput" type=text name="y" value="<?= $y ?>"><br>
+				<div class="wrap">
+					<div class="selectOp dataInput">Выберите действие:</div>
+					<select name=action id="id_of_select">
+						<option value="plus" <?= $pl ?>>+</option>
+						<option value="-" <?= $sb ?>>-</option>
+						<option value="*" <?= $ml ?>>*</option>
+						<option value="/" <?= $dv ?>>/</option>
+
+					</select>
+				</div>
+				<br />
+				<div class="text">Результат: </div>
+				<input class="dataInput" type=text name="res" value="<?= $result ?>"><br>
+				<input class="btn" type=submit value="Получить результат">
+			</form>
+			<form class="formAct" method="get" enctype="multipart/form-data">
+				<div class="wrapDiv">
+					<div class="single">Возведение в степень</div>
+					<div class="single">Корень квадратный</div>
+					<div class="single">Процент от деления</div>
+					<div class="actionFormAct"><?= $action ?></div>
+					<div class="result2"><?= $result2;?></div>
+				</div>
+			</form>
+	</div>
+	<?php
+	?>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+	let single = document.querySelectorAll(".single");
+
+	console.log(single);
+	let innerText = "";
+
+	single.forEach(function(item) {
+		item.addEventListener("click", function() {
+			let formAtc = document.querySelector(".formAct");
+			formAtc.submit();
+			innerText = item.innerHTML;
+			let query2 = "exponent=" + innerText
+
+			function send() {
+				$.ajax({
+					type: "POST",
+					url: "server2.php",
+					data: query2,
+					success: function(answer) {
+						alert(answer);
+					}
+				});
 			}
-		}
-		echo 'Cумма чисел равна: ' . summ($x, $y) . '<br>';
-		echo 'Разность чисел равна: ' . diff($x, $y) . '<br>';
-		echo 'Произведение чисел равно: ' . multipl($x, $y) . '<br>';
-		echo 'Частное чисел равно: ' . div($x, $y) . '<br>';
-
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 4</h4>";
+			send();
+		});
+	});
 
 
-		function getСalculation($arg1, $arg2, $operation)
-		{
-			echo "<i>Первая переменная - </i>" . $arg1 . "<br>";
-			echo "<i>Вторая переменная - </i>" . $arg2 . "<br>";
-			echo "<br>";
-			if ($arg2 === 0) {
-				echo 'На ноль делить нельзя! ' . '<br>';
-				echo 'Замените вторую переменную ' . '<br>';
-			} else if(!is_int($arg1)) { // && is_numeric($arg2))
-				echo 'Вводить можно только числовыe значения. ' . '<br>';
-				echo 'Проверьте значение первой переменной. ' . '<br>';
-			} else if(!is_int($arg2)) { // && is_numeric($arg2))
-				echo 'Вводить можно только числовыe значения. ' . '<br>';
-				echo 'Проверьте значение второй переменной. ' . '<br>';
-			} else {
-				switch ($operation) {
-					case '+':
-						echo 'Cумма чисел равна: ' . summ($arg1, $arg2) . '<br>';
-						break;
-					case '-':
-						echo 'Разность чисел равна: ' . diff($arg1, $arg2) . '<br>';
-						break;
-					case '*':
-						echo 'Произведение чисел равно: ' . multipl($arg1, $arg2) . '<br>';
-						break;
-					case '/':
-						echo 'Частное чисел равно: ' . div($arg1, $arg2) . '<br>';
-						break;
-					default:
-						echo 'Оператор введен не верно!';
-						break;
+	let btn = document.querySelector(".btn");
+	btn.addEventListener("click", function() {
+		let dataInput = Array.from(document.querySelectorAll(".dataInput"));
+		let dataInput2 = document.getElementById('id_of_select');
+		let opt = document.querySelectorAll("option");
+		let sign = dataInput2[dataInput2.selectedIndex].value;
+		let query = "number_one=" + dataInput[0].value + "&number_two=" + dataInput[1].value + "&action=" + sign + "&res=" + dataInput[3].value;
+
+		function send() {
+			$.ajax({
+				type: "POST",
+				url: "server.php",
+				data: query,
+				success: function(answer) {
+					alert(answer);
 				}
-			}
+			});
 		}
+		send();
+	});
+</script>
 
-		getСalculation(5, 8, "/");
-
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 5</h4>";
-		$date = date('Y');
-		echo "<footer>" . " Сейчас  " . $date . " год </footer>";
-
-
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 6</h4>";
-
-		function power($val, $pow)
-		{
-
-			$result = $val;
-			if ($pow === 0) {
-				$result = 'Возведение в нулевую степень = 1';
-			} else if ($pow > 1) {
-				$result *= power($val, ($pow - 1));
-			}
-			return $result;
-		}
-		$val = 3;
-		$pow = 4;
-		echo "<i>Число - </i>" . $val . "<br>";
-		echo "<i>Степень - </i>" . $pow . "<br>";
-		echo "<br>";
-		echo "Результат - :" . power($val, $pow);
-
-		echo "<hr>";
-		echo "<h4 class = \"myh3\">Task 7</h4>";
-		date_default_timezone_set("UTC"); 
-		$time = time();
-		$time += 3 * 3600;
-
-		$hour = date("H", $time);
-		$min = date("i", $time);
-		$sec = date("s", $time);
-		// $hour =3;
-		// $min = 21;
-		// $sec = 6;
-		$hourEnding = ['час', 'часa', 'часов'];
-		$minEnding = ['минута', 'минуты', 'минут'];
-		$secEnding = ['секунда', 'секунды', 'секунд'];
-
-
-		function findEnd ($checkNumber, $arrayOfEndings){
-
-			$temp = $checkNumber % 10;
-	
-			if($temp >= 5) {
-				$endig = $arrayOfEndings[2];
-			
-			} else if($temp > 1 && $temp < 5) {
-				$endig = $arrayOfEndings[1];
-			} else if ($temp = 1) {
-				$endig = $arrayOfEndings[0];
-			} else {
-				$endig = $arrayOfEndings[2];
-			} 
-			
-			return $endig;
-		};
-		echo "<br>";
-
-		echo "Сейчас " . $hour. " " . findEnd($hour, $hourEnding) . " " .
-		$min. " " . findEnd($min, $minEnding) . " " .
-		$sec. " " . findEnd($sec, $secEnding);
-
-		echo "<br>";
-		echo "<hr>";
-		?>
-</div>
-
-<div id="content">
-		<?php
-		echo "<h1>$titleH1</h1>"
-		?>
-<ul id="menu">
-	<li><a href="#">home</a></li>
-	<li><a href="#">archive</a></li>
-	<li><a href="#">contact</a></li>
-</ul>
-
-
-<div class="post">
-	<div class="details">
-		<h2><a href="#">Nunc commodo euismod massa quis vestibulum</a></h2>
-		<p class="info">posted 3 hours ago in <a href="#">general</a></p>
-
-	</div>
-	<div class="body">
-		<p>Nunc eget nunc libero. Nunc commodo euismod massa quis vestibulum. Proin mi nibh, dignissim a pellentesque at, ultricies sit amet sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel lorem eu libero laoreet facilisis. Aenean placerat, ligula quis placerat iaculis, mi magna luctus nibh, adipiscing pretium erat neque vitae augue. Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at ipsum.</p>
-	</div>
-	<div class="x"></div>
-</div>
-
-<div class="col">
-	<h3><a href="#">Ut enim risus rhoncus</a></h3>
-	<p>Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at.</p>
-	<p>&not; <a href="#">read more</a></p>
-</div>
-<div class="col">
-	<h3><a href="#">Maecenas iaculis leo</a></h3>
-	<p>Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at.</p>
-	<p>&not; <a href="#">read more</a></p>
-</div>
-<div class="col last">
-	<h3><a href="#">Quisque consectetur odio</a></h3>
-	<p>Quisque consectetur odio ut sem semper commodo. Maecenas iaculis leo a ligula euismod condimentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut enim risus, rhoncus sit amet ultricies vel, aliquet ut dolor. Duis iaculis urna vel massa ultricies suscipit. Phasellus diam sapien, fermentum a eleifend non, luctus non augue. Quisque scelerisque purus quis eros sollicitudin gravida. Aliquam erat volutpat. Donec a sem consequat tortor posuere dignissim sit amet at.</p>
-	<p>&not; <a href="#">read more</a></p>
-</div>
-
-<div id="footer">
-	<p>Copyright &copy; <b><?=$date = date('Y')?></b> год <em>minimalistica</em> &middot; Design: Luka Cvrk, <a href="http://www.solucija.com/" title="Free CSS Templates">Solucija</a></p>
-</div>
-</div>
 </body>
 
 </html>
