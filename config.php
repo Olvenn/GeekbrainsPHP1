@@ -1,6 +1,6 @@
 <?php
 const SERVER = "localhost";
-const DB = "user_gallery";
+const DB = "calculator";
 const LOGIN = "root";
 const PASS = "";
 
