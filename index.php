@@ -90,7 +90,7 @@
 	$action = $data['exponent'];
 	// $res = $x . $a . $y;
 
-	if (isset($_GET["action"]) ? htmlspecialchars($_GET["action"]) : "") {
+	if (isset($_GET["action"]) ? $_GET["action"] : "") {
 		$a = $_GET["action"];
 	} else {
 		$a = $a;
@@ -108,7 +108,7 @@
 		$y = $y;
 	};
 
-	if (isset($_GET['exponent']) ? (int) ($_GET['exponent']) : "") {
+	if (isset($_GET['exponent']) ? htmlspecialchars($_GET['exponent']) : "") {
 		$action = (float) $_GET["exponent"];
 	} else {
 		$action = $action;
@@ -192,7 +192,7 @@
 					<div class="single">Корень квадратный</div>
 					<div class="single">Процент от деления</div>
 					<div class="actionFormAct"><?= $action ?></div>
-					<div class="result2"><?= $result2;  ?></div>
+					<div class="result2"><?= $result2;?></div>
 				</div>
 			</form>
 	</div>
